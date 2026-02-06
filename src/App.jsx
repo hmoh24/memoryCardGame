@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import Score from "./components/score/Score";
+import AllCards from "./components/allCards/AllCards";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const cardData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; //make state
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <header>
+        <section className="top">
+          <h1>Bestiary Memory Game</h1>
+          <Score />
+          <Score />
+        </section>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Clicking on a unique image gets you points, clicking on an image
+          you've clicked before restarts the game.
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </header>
+      <AllCards children={cardData} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
