@@ -7,7 +7,9 @@ import AllCards from "./components/allCards/AllCards";
 
 function App() {
   const [count, setCount] = useState(0);
-  const cardData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]; //make state
+  const [cardData, setCardData] = useState([
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+  ]); //make state
 
   return (
     <>
@@ -22,7 +24,7 @@ function App() {
           you've clicked before restarts the game.
         </p>
       </header>
-      <AllCards children={cardData} />
+      <AllCards cardData={cardData} setCardData={setCardData} />
     </>
   );
 }
