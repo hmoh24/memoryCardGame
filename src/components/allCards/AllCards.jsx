@@ -7,17 +7,18 @@ export default function AllCards({
   setScore,
   setBestScore,
 }) {
-  const [clickedCards, setClickedCards] = useState([]);
+  const [clickedCardId, setClickedCardId] = useState([]);
 
   function handleCardClick(value) {
-    if (!clickedCards.includes(value)) {
-      setClickedCards((prev) => {
+    if (!clickedCardId.includes(value)) {
+      setClickedCardId((prev) => {
         let updated = [...prev, value];
         setBestScore((score) => {
           return updated.length > score ? score + 1 : score;
         });
         return updated;
       });
+
       setScore((prev) => prev + 1);
 
       setCardData((prevCards) => {
@@ -25,7 +26,7 @@ export default function AllCards({
       });
     } else {
       setScore(0);
-      setClickedCards((prev) => []);
+      setClickedCardId((prev) => []);
       setCardData((prevCards) => {
         return randomiseArray(prevCards, randomIndex);
       });
@@ -36,7 +37,11 @@ export default function AllCards({
     <main>
       {cardData.map((cardValue) => {
         return (
-          <Card key={cardValue} value={cardValue} onClick={handleCardClick} />
+          <Card
+            key={cardValue.id}
+            value={cardValue.id}
+            onClick={handleCardClick}
+          />
         );
       })}
     </main>
