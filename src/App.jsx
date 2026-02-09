@@ -45,7 +45,8 @@ function App() {
           initialCardData[i].imageURL = fetchedData.originalimage.source;
           initialCardData[i].desc = fetchedData.extract
         }
-        setCardData(initialCardData)
+        const randomised =  randomiseArray(initialCardData, randomIndex)
+        setCardData( randomised)
       })}).catch(console.error)
          
   }, []);
