@@ -1,4 +1,4 @@
-import Card from "../card/card";
+import Card from "../card/Card";
 import { randomIndex, randomiseArray } from "../../util/helperFuncs";
 import { useState } from "react";
 export default function AllCards({
