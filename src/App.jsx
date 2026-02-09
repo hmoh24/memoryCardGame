@@ -14,22 +14,40 @@ function App() {
 
   useEffect(() => {
     const initialCardData = [
-      { id: 0, name: "Griffin", title: "", imageURL: "" },
-      { id: 1, name: "Basilisk", title: "", imageURL: "" },
-      { id: 2, name: "Kraken", title: "", imageURL: "" },
-      { id: 3, name: "Minotaur", title: "", imageURL: "" },
-      { id: 4, name: "Kitsune", title: "", imageURL: "" },
-      { id: 5, name: "Golem", title: "", imageURL: "" },
-      { id: 6, name: "Wendigo", title: "", imageURL: "" },
-      { id: 7, name: "Djinn", title: "", imageURL: "" },
-      { id: 8, name: "Leviathan", title: "", imageURL: "" },
-      { id: 9, name: "Chimera", title: "", imageURL: "" },
-      { id: 10, name: "Phoenix", title: "", imageURL: "" },
-      { id: 11, name: "Cerberus", title: "", imageURL: "" },
+      { id: 0, name: "Griffin", imageURL: "", desc: "" },
+      { id: 1, name: "Basilisk", imageURL: "", desc: "" },
+      { id: 2, name: "Kraken", imageURL: "", desc: "" },
+      { id: 3, name: "Minotaur", imageURL: "", desc: "" },
+      { id: 4, name: "Kitsune", imageURL: "", desc: "" },
+      { id: 5, name: "Golem", imageURL: "", desc: "" },
+      { id: 6, name: "Dragon", imageURL: "", desc: "" },
+      { id: 7, name: "Jinn", imageURL: "", desc: "" },
+      { id: 8, name: "Leviathan", imageURL: "", desc: "" },
+      { id: 9, name: "Goblin", imageURL: "", desc: "" },
+      { id: 10, name: "Mermaid", imageURL: "", desc: "" },
+      { id: 11, name: "Cerberus", imageURL: "", desc: "" },
     ];
 
-    async function fetchData() {}
-    //promise.all since many fetches then i want to wait for them to resolve?
+    async function fetchData(title) {
+      try {
+        const response = await fetch(baseURL+title)
+        const result = await response.json()
+        return result
+      }
+      catch(e){
+        throw new Error(e.message)
+      }
+    }
+
+    Promise.all(initialCardData.map(cardObject => {return fetchData(cardObject.name)})).then(returnArray => {
+        returnArray.forEach((fetchedData, i) => {
+          if (initialCardData[i].name === fetchedData.title) {
+          initialCardData[i].imageURL = fetchedData.originalimage.source;
+          initialCardData[i].desc = fetchedData.extract
+        }
+        setCardData(initialCardData)
+      })}).catch(console.error)
+         
   }, []);
 
   return (
@@ -45,12 +63,15 @@ function App() {
           you've clicked before restarts the game.
         </p>
       </header>
-      <AllCards
+      {
+        cardData && <AllCards
         cardData={cardData}
         setCardData={setCardData}
         setScore={setScore}
         setBestScore={setBestScore}
       />
+      }
+      
     </>
   );
 }
