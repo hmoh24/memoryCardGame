@@ -39,7 +39,7 @@ export default function AllCards({
         return (
           <Card
             key={cardValue.id}
-            value={cardValue.id}
+            value={cardValue}
             onClick={handleCardClick}
           />
         );

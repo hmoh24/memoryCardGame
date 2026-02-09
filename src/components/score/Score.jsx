@@ -1,7 +1,7 @@
-export default function Score({ score }) {
+export default function Score({ text, score }) {
   return (
     <>
-      <p>Score is: {score}</p>
+      <p>{text} {score}</p>
     </>
   );
 }

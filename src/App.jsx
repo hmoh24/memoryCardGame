@@ -55,8 +55,8 @@ function App() {
       <header>
         <section className="top">
           <h1>Bestiary Memory Game</h1>
-          <Score score={score} />
-          <Score score={bestScore} />
+          <Score text={'Score is:'} score={score} />
+          <Score text={'Best score is:'} score={bestScore} />
         </section>
         <p>
           Clicking on a unique image gets you points, clicking on an image
